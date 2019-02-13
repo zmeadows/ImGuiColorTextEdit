@@ -6,7 +6,10 @@
 
 #include "TextEditor.h"
 
-#define IMGUI_DEFINE_MATH_OPERATORS
+#ifndef IMGUI_DEFINE_MATH_OPERATORS
+#define IMGUI_DEFINE_MATH_OPERATORS 1
+#endif
+
 #include "imgui.h" // for imGui::GetCurrentWindow()
 
 // TODO
