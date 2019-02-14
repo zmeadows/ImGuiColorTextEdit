@@ -727,35 +727,35 @@ void TextEditor::Render()
 			drawList->AddText(ImVec2(lineStartScreenPos.x + mTextStart - lineNoWidth, lineStartScreenPos.y), mPalette[(int)PaletteIndex::LineNumber], buf);
 
 			// Highlight the current line (where the cursor is)
-			if (mState.mCursorPosition.mLine == lineNo)
-			{
-				auto focused = ImGui::IsWindowFocused();
+			// if (mState.mCursorPosition.mLine == lineNo)
+			// {
+			// 	auto focused = ImGui::IsWindowFocused();
 
-				if (!HasSelection())
-				{
-					auto end = ImVec2(start.x + contentSize.x + scrollX, start.y + mCharAdvance.y);
-					drawList->AddRectFilled(start, end, mPalette[(int)(focused ? PaletteIndex::CurrentLineFill : PaletteIndex::CurrentLineFillInactive)]);
-					drawList->AddRect(start, end, mPalette[(int)PaletteIndex::CurrentLineEdge], 1.0f);
-				}
+			// 	if (!HasSelection())
+			// 	{
+			// 		auto end = ImVec2(start.x + contentSize.x + scrollX, start.y + mCharAdvance.y);
+			// 		drawList->AddRectFilled(start, end, mPalette[(int)(focused ? PaletteIndex::CurrentLineFill : PaletteIndex::CurrentLineFillInactive)]);
+			// 		drawList->AddRect(start, end, mPalette[(int)PaletteIndex::CurrentLineEdge], 1.0f);
+			// 	}
 
-				float cx = TextDistanceToLineStart(mState.mCursorPosition);
+			// 	float cx = TextDistanceToLineStart(mState.mCursorPosition);
 
-				if (focused)
-				{
-					static auto timeStart = std::chrono::system_clock::now();
-					auto timeEnd = std::chrono::system_clock::now();
-					auto diff = timeEnd - timeStart;
-					auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
-					if (elapsed > 400)
-					{
-						ImVec2 cstart(textScreenPos.x + cx, lineStartScreenPos.y);
-						ImVec2 cend(textScreenPos.x + cx + (mOverwrite ? mCharAdvance.x : 1.0f), lineStartScreenPos.y + mCharAdvance.y);
-						drawList->AddRectFilled(cstart, cend, mPalette[(int)PaletteIndex::Cursor]);
-						if (elapsed > 800)
-							timeStart = timeEnd;
-					}
-				}
-			}
+			// 	if (focused)
+			// 	{
+			// 		static auto timeStart = std::chrono::system_clock::now();
+			// 		auto timeEnd = std::chrono::system_clock::now();
+			// 		auto diff = timeEnd - timeStart;
+			// 		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
+			// 		if (elapsed > 400)
+			// 		{
+			// 			ImVec2 cstart(textScreenPos.x + cx, lineStartScreenPos.y);
+			// 			ImVec2 cend(textScreenPos.x + cx + (mOverwrite ? mCharAdvance.x : 1.0f), lineStartScreenPos.y + mCharAdvance.y);
+			// 			drawList->AddRectFilled(cstart, cend, mPalette[(int)PaletteIndex::Cursor]);
+			// 			if (elapsed > 800)
+			// 				timeStart = timeEnd;
+			// 		}
+			// 	}
+			// }
 
 			// Render colorized text
 			auto prevColor = line.empty() ? mPalette[(int)PaletteIndex::Default] : GetGlyphColor(line[0]);
